@@ -25,4 +25,28 @@ public class Rect extends Figure {
         g2d.setPaint(this.corl);
         g2d.drawRect(this.x,this.y, this.w,this.h);
     }
+    public void paint1 (Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setPaint(this.corf);
+        g2d.fillRect(this.x,this.y, this.w,this.h);
+        g2d.setPaint(this.corl);
+        g2d.drawRect(this.x,this.y, this.w,this.h);g2d.setPaint(this.corfocus);
+        g2d.drawRect(this.x - 5,this.y - 5,this.w + 10,this.h +10);
+    }
+    public void resizeu(){
+        this.x-=5;
+        this.y-=5;
+        this.w+=10;
+        this.h+=10;
+    }
+    public void resized(){
+        this.x+=5;
+        this.y+=5;
+        this.w-=10;
+        this.h-=10;
+    }
+    public void drag(int dx, int dy) {
+        this.x = dx;
+        this.y = dy;
+    }
 }
