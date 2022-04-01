@@ -58,8 +58,8 @@ class ListFrame extends JFrame {
         this.addMouseMotionListener(
             new MouseMotionAdapter() {
                 public void mouseDragged (MouseEvent evt){
-                    if((focus != null) && (focus.x <= evt.getX()) && (focus.y <= evt.getY()) && (focus.w + focus.x > evt.getX()) && (focus.h + focus.y > evt.getY())){
-                        focus.drag(evt.getX(), evt.getY());
+                    if(focus != null){
+                        focus.drag(evt.getX(),evt.getY());
                     }
                     repaint();
                 }
