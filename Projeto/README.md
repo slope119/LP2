@@ -1,4 +1,4 @@
-####Lista de comandos do programa:
+###Lista de comandos do programa:
 ```
--**E**: cria uma Elipse
+-__E__: cria uma Elipse
 ```
