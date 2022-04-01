@@ -7,8 +7,6 @@ import java.util.Random;
 import figures.Rect;
 import figures.Ellipse;
 import figures.Figure;
-import figures.Line;
-
 
 class ListApp{
     public static void main (String[] args) {
@@ -37,10 +35,17 @@ class ListFrame extends JFrame {
             new MouseAdapter() {
                 public void mousePressed (MouseEvent evt){
                     focus =  null;
-                    for (Figure fig: figs){
-                        if((fig.x <= evt.getX()) && (fig.y <= evt.getY()) && (fig.w + fig.x > evt.getX()) && (fig.h + fig.y > evt.getY())){
-                            focus=fig;
-                            figs.remove(fig);
+                    for (int i=0; i < figs.size(); i++){
+                        if((figs.get(i).x <= evt.getX()) && (figs.get(i).y <= evt.getY()) && (figs.get(i).w + figs.get(i).x > evt.getX()) && (figs.get(i).h + figs.get(i).y > evt.getY())){
+                            focus=figs.get(i);
+                            figs.remove(figs.get(i));
+                            figs.add(focus);
+                        }
+                    }
+                    for (int i=0; i < figs.size(); i++){
+                        if((figs.get(i).x <= evt.getX()) && (figs.get(i).y <= evt.getY()) && (figs.get(i).w + figs.get(i).x > evt.getX()) && (figs.get(i).h + figs.get(i).y > evt.getY())){
+                            focus=figs.get(i);
+                            figs.remove(figs.get(i));
                             figs.add(focus);
                         }
                     }
@@ -50,14 +55,16 @@ class ListFrame extends JFrame {
         );
 
 
-//        this.addMouseMotionListener(
-//            new MouseMotionAdapter() {
-//                public void mouseDragged (MouseEvent evt){
-//                    //aqui vai entrar a funçao de drag das figuras
-//                    repaint();
-//                }
-//            }
-//        );
+        this.addMouseMotionListener(
+            new MouseMotionAdapter() {
+                public void mouseDragged (MouseEvent evt){
+                    if((focus != null) && (focus.x <= evt.getX()) && (focus.y <= evt.getY()) && (focus.w + focus.x > evt.getX()) && (focus.h + focus.y > evt.getY())){
+                        focus.drag(evt.getX(), evt.getY());
+                    }
+                    repaint();
+                }
+            }
+        );
 
 
         this.addKeyListener (
@@ -74,39 +81,52 @@ class ListFrame extends JFrame {
                     int b2 = rand.nextInt(255);
                     int x = rand.nextInt(350);
                     int y = rand.nextInt(350);
-                    int w = rand.nextInt(50);
-                    int h = rand.nextInt(50);
-                    int x2 = rand.nextInt(350);
-                    int y2 = rand.nextInt(350);
+                    int h = rand.nextInt(75);
+                    int w = rand.nextInt(75 - h) + h + 15;
                     if (evt.getKeyChar() == 'r') {
                         mx = p.x - getLocation().x;
                         my = p.y - getLocation().y;
-                        Rect r = new Rect(mx,my, 50,50, new Color(r1,g,b), new Color(r2,g2,b2));
+                        Rect r = new Rect(mx,my, w,h, new Color(r1,g,b), new Color(r2,g2,b2));
+                        focus = r;
                         figs.add(r);
                     } 
                     else if (evt.getKeyChar() == 'e') {
                         mx = p.x - getLocation().x;
                         my = p.y - getLocation().y;
-                        figs.add(new Ellipse(mx,my, 50,100,new Color(r1,g,b), new Color(r2,g2,b2)));
+                        Ellipse e = new Ellipse(mx,my, w,h,new Color(r1,g,b), new Color(r2,g2,b2));
+                        focus = e;
+                        figs.add(e);
                     }
-                    else if (evt.getKeyChar() == 'l') {
+                    else if (evt.getKeyChar() == 'q') {
                         mx = p.x - getLocation().x;
                         my = p.y - getLocation().y;
-                        figs.add(new Line(mx,my, x2,y2, new Color(r1,g,b)));
+                        Rect q = new Rect(mx,my, h,h, new Color(r1,g,b), new Color(r2,g2,b2));
+                        focus = q;
+                        figs.add(q);
                     }
                     else if (evt.getKeyChar() == 'c') {
                         mx = p.x - getLocation().x;
                         my = p.y - getLocation().y;
-                        figs.add(new Ellipse(mx,my, 50,50,new Color(r1,g,b), new Color(r2,g2,b2)));
+                        Ellipse c = new Ellipse(mx,my, h,h,new Color(r1,g,b), new Color(r2,g2,b2));
+                        focus = c;
+                        figs.add(c);
                     }
                     else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
                         if(focus!= null){
                             figs.remove(figs.size()-1);
+                            focus = null;
                         }
-                    }else if (evt.getKeyCode() == 107) {
+                    }
+                    else if (evt.getKeyCode() == 107) {
                         if(focus!= null){
-                            //implementar aumentar e diminuir a figura
-
+                            figs.get(figs.size()-1).resizeu();
+                            focus = figs.get(figs.size()-1);
+                        }
+                    }
+                    else if (evt.getKeyCode() == 109) {
+                        if(focus!= null){
+                            figs.get(figs.size()-1).resized();
+                            focus = figs.get(figs.size()-1);
                         }
                     }
                     else if (evt.getKeyCode() == KeyEvent.VK_TAB) {
@@ -132,6 +152,7 @@ class ListFrame extends JFrame {
             else{
                 fig.paint(g);
             }
+            //fig.paint(g);
         }
     }
 }
