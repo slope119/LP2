@@ -46,7 +46,11 @@ public class Rect extends Figure {
         this.h-=10;
     }
     public void drag(int dx, int dy) {
-        this.x = dx;
-        this.y = dy;
+        if(difx == 1000 && dify == 1000){
+            difx = this.x - dx;
+            dify = this.y - dy;
+        }
+        this.x = dx + difx;
+        this.y = dy + dify;
     }
 }
