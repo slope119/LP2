@@ -67,6 +67,18 @@ class ListFrame extends JFrame {
         );
 
 
+        this.addMouseMotionListener(
+            new MouseMotionAdapter() {
+                public void mouseReleased (MouseEvent evt){
+                    if(focus != null){
+                       focus.difx = 1000;
+                       focus.dify = 1000;
+                    }
+                }
+            }
+        );
+
+
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
@@ -86,28 +98,28 @@ class ListFrame extends JFrame {
                     if (evt.getKeyChar() == 'r') {
                         mx = p.x - getLocation().x;
                         my = p.y - getLocation().y;
-                        Rect r = new Rect(mx,my, w,h, new Color(r1,g,b), new Color(r2,g2,b2));
+                        Rect r = new Rect(mx,my, w,h, new Color(r1,g,b), new Color(r2,g2,b2), 1000, 1000);
                         focus = r;
                         figs.add(r);
                     } 
                     else if (evt.getKeyChar() == 'e') {
                         mx = p.x - getLocation().x;
                         my = p.y - getLocation().y;
-                        Ellipse e = new Ellipse(mx,my, w,h,new Color(r1,g,b), new Color(r2,g2,b2));
+                        Ellipse e = new Ellipse(mx,my, w,h,new Color(r1,g,b), new Color(r2,g2,b2), 1000, 1000);
                         focus = e;
                         figs.add(e);
                     }
                     else if (evt.getKeyChar() == 'q') {
                         mx = p.x - getLocation().x;
                         my = p.y - getLocation().y;
-                        Rect q = new Rect(mx,my, h,h, new Color(r1,g,b), new Color(r2,g2,b2));
+                        Rect q = new Rect(mx,my, h,h, new Color(r1,g,b), new Color(r2,g2,b2), 1000, 1000);
                         focus = q;
                         figs.add(q);
                     }
                     else if (evt.getKeyChar() == 'c') {
                         mx = p.x - getLocation().x;
                         my = p.y - getLocation().y;
-                        Ellipse c = new Ellipse(mx,my, h,h,new Color(r1,g,b), new Color(r2,g2,b2));
+                        Ellipse c = new Ellipse(mx,my, h,h,new Color(r1,g,b), new Color(r2,g2,b2), 1000, 1000);
                         focus = c;
                         figs.add(c);
                     }
