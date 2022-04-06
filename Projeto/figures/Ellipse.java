@@ -6,15 +6,13 @@ import java.awt.geom.Ellipse2D.Double;
 
 public class Ellipse extends Figure {
 
-    public Ellipse (int x, int y, int w, int h, Color corl, Color corf, int difx, int dify) {
+    public Ellipse (int x, int y, int w, int h, Color corl, Color corf) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.corl = corl;
         this.corf = corf;
-        this.difx = difx;
-        this.dify = dify;
     }
 
     public void print () {
@@ -50,11 +48,7 @@ public class Ellipse extends Figure {
         this.w-=10;
         this.h-=10;
     }
-    public void drag(int dx, int dy){
-        if(difx == 1000 && dify == 1000){
-            difx = this.x - dx;
-            dify = this.y - dy;
-        }
+    public void drag(int dx, int dy, int difx, int dify){
         this.x = dx + difx;
         this.y = dy + dify;
 
