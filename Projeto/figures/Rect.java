@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Rect extends Figure {
 
-    public Rect (int x, int y, int w, int h, Color corl, Color corf, int difx, int dify) {
+    public Rect (int x, int y, int w, int h, Color corl, Color corf) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -45,11 +45,7 @@ public class Rect extends Figure {
         this.w-=10;
         this.h-=10;
     }
-    public void drag(int dx, int dy) {
-        if(difx == 1000 && dify == 1000){
-            difx = this.x - dx;
-            dify = this.y - dy;
-        }
+    public void drag(int dx, int dy, int difx, int dify) {
         this.x = dx + difx;
         this.y = dy + dify;
     }
