@@ -5,6 +5,7 @@
   - **r**: cria um Retangulo
   - **q**: cria um Quadrado
   - **f**: muda as cores da figura
+  - **w,a,s,d**: move a figura na direção das teclas
 - **Manipular Figura**:
   - **+**: aumenta o tamanho da figura
   - **-**: diminui o tamanho da figura 
