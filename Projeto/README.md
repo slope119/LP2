@@ -4,9 +4,11 @@
   - **c**: cria um Círculo
   - **r**: cria um Retangulo
   - **q**: cria um Quadrado
+  - **f**: muda as cores da figura
 - **Manipular Figura**:
   - **+**: aumenta o tamanho da figura
   - **-**: diminui o tamanho da figura 
+  - **clique e arraste no quadrado preto**: ajusta as dimensoes da figura de acordo com o mouse
   - **delete**: deleta a figura selecionada em foco
   - **clique**: seleciona a figura para ficar em foco
   - **arrastar**: move a figura
