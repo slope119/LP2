@@ -32,6 +32,8 @@ public class Rect extends Figure {
         g2d.setPaint(this.corl);
         g2d.drawRect(this.x,this.y, this.w,this.h);g2d.setPaint(this.corfocus);
         g2d.drawRect(this.x - 5,this.y - 5,this.w + 10,this.h +10);
+        g2d.setPaint(new Color(0,0,0));
+        g2d.fillRect(this.x + this.w-10,this.y + this.h-10,10 ,10);
     }
     public void resizeu(){
         this.x-=5;
