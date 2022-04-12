@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 import figures.Rect;
 import figures.Ellipse;
 import figures.Figure;
@@ -41,7 +42,7 @@ class ListFrame extends JFrame {
                     prx = evt.getX();
                     pry = evt.getY();
                     for (int i=figs.size()-1; i >= 0; i--){
-                        if((figs.get(i).x <= prx) && (figs.get(i).y <= pry) && (figs.get(i).w + figs.get(i).x > prx) && (figs.get(i).h + figs.get(i).y > pry)){
+                        if(figs.get(i).clicked(prx,pry) == true){
                             focus=figs.get(i);
                             figs.remove(figs.get(i));
                             figs.add(focus);
@@ -206,3 +207,38 @@ class ListFrame extends JFrame {
         }
     }
 }
+
+
+
+
+//*****4 figura implementada******
+//*****deletar com delete implementado******
+//***********mouse listener e motion listener implementados**********
+//**********pra fazer a figura surgir no mouse eu implemento uma detecçao do xy atual dele e uso como coordenadas xy na hora de criar a figura*************
+
+
+
+
+//drag é pegar e sempre atualizar o x,y relacionado a figura em foco // repaint() no final pra ficar sempre atualizando (nao acho que seja uma preocupação)
+//z order pode ser feito com uma variavel do tipo booleana (acho q so de colocar o foco no final da lista ja da certo)
+//tab pra trocar o foco pega sempre o primeiro elemento da lista e taca pro final
+//array com retangulo adaptavel, um retangulo nulo e outro vermelho q se adapta ao w,h,x,y da figura em foco atual
+//o highlight pode ser feito armazenando as informaçoes RGB e deixando a figura vermelha ou ent criando o retangulo
+
+
+//if focus != null{
+//    colorir a figura de vermelho;
+//} 
+
+//criar uma nova função de paint pra fazer a marcação
+//if fig==foco{
+//    fig.paint1(g);
+//}
+
+//a funçao drag tem q estar dentro das figuras (com as setinhas puxa essa mesma funçao)
+
+
+
+
+
+///TA PEGANDO O XY ATUAL E SOMANDO
