@@ -56,4 +56,12 @@ public class Ellipse extends Figure {
         this.y = dy + dify;
 
     }
+    public boolean clicked(int prx, int pry){
+        if((this.x <= prx) && (this.y <= pry) && (this.w + this.x > prx) && (this.h + this.y > pry)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

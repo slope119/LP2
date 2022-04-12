@@ -1,9 +1,11 @@
 package figures;
 
+import ivisible.IVisible;
+
 import java.awt.Graphics;
 import java.awt.*;
 
-public abstract class Figure {
+public abstract class Figure implements IVisible {
     public int x, y, w, h;
     Color corfocus = new Color(255, 0, 0);
     public int r1,g,b;
@@ -14,4 +16,5 @@ public abstract class Figure {
     public abstract void resizeu ();
     public abstract void resized ();
     public abstract void drag (int dx,int dy, int difx, int dify);
+    public abstract boolean clicked(int prx, int pry);
 }
