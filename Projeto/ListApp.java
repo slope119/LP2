@@ -210,35 +210,21 @@ class ListFrame extends JFrame {
 
 
 
+//foco vai continuar funcionando depois de fazer uma lista ainda mais heterogenea com botoes e figuras
 
-//*****4 figura implementada******
-//*****deletar com delete implementado******
-//***********mouse listener e motion listener implementados**********
-//**********pra fazer a figura surgir no mouse eu implemento uma detecçao do xy atual dele e uso como coordenadas xy na hora de criar a figura*************
+//foco vai determinar quando qualquer coisa é clicada, nao vai ter q ser mexido
 
 
-
-
-//drag é pegar e sempre atualizar o x,y relacionado a figura em foco // repaint() no final pra ficar sempre atualizando (nao acho que seja uma preocupação)
-//z order pode ser feito com uma variavel do tipo booleana (acho q so de colocar o foco no final da lista ja da certo)
-//tab pra trocar o foco pega sempre o primeiro elemento da lista e taca pro final
-//array com retangulo adaptavel, um retangulo nulo e outro vermelho q se adapta ao w,h,x,y da figura em foco atual
-//o highlight pode ser feito armazenando as informaçoes RGB e deixando a figura vermelha ou ent criando o retangulo
-
-
-//if focus != null{
-//    colorir a figura de vermelho;
-//} 
-
-//criar uma nova função de paint pra fazer a marcação
-//if fig==foco{
-//    fig.paint1(g);
+//   (dentro do mouse listener)
+//if(focus == botao r){
+//    criar retangulo na posiçao atual do mouse apos o clique
 //}
 
-//a funçao drag tem q estar dentro das figuras (com as setinhas puxa essa mesma funçao)
+//para solucionar o tab vou ter q fazer uma forma inteligente de percorrer a lista e identificar se é um botao ou n
+//provavelmente botar uma condiçao e fazer um += ao i para pular o elemento botao na lista
 
+//solucionar problema de alternar clique de foco (ou não)
 
-
-
-
-///TA PEGANDO O XY ATUAL E SOMANDO
+//fazer condiçao da area do clique para separar a interface, se clicar dentro so faz nada, se clicar fora cria a figura e torna o foco == null;
+//fazer novas condições no metodo drag pra impedir que figuras fiquem sobre os botoes
+//criar linhas para determinar a area da interface
