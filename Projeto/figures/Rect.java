@@ -35,6 +35,24 @@ public class Rect extends Figure {
         g2d.setPaint(new Color(0,0,0));
         g2d.fillRect(this.x + this.w-10,this.y + this.h-10,10 ,10);
     }
+    public int getX(){
+        return(this.x);
+    }
+    public int getY(){
+        return(this.y);
+    }
+    public void movew(){
+        this.y -= 15;
+    }
+    public void movea(){
+        this.x -= 15;
+    }
+    public void moves(){
+        this.y += 15;
+    }
+    public void moved(){
+        this.x += 15;
+    }
     public void resizeu(){
         this.x-=5;
         this.y-=5;
@@ -42,10 +60,16 @@ public class Rect extends Figure {
         this.h+=10;
     }
     public void resized(){
-        this.x+=5;
-        this.y+=5;
-        this.w-=10;
-        this.h-=10;
+        if(this.w > 20 && this.h > 20){
+            this.x+=5;
+            this.y+=5;
+            this.w-=10;
+            this.h-=10;
+        }
+    }
+    public void recolor(int r1, int g, int b, int r2, int g2, int b2){
+        this.corl = new Color(r1,g,b);
+        this.corf = new Color(r2,g2,b2);
     }
     public void drag(int dx, int dy, int difx, int dify) {
         this.x = dx + difx;
@@ -57,6 +81,28 @@ public class Rect extends Figure {
         }
         else{
             return false;
+        }
+    }
+    public boolean clickeds(int prx, int pry){
+        if(((this.x + this.w - 10) <= prx) && ((this.y + this.h - 10) <= pry) && ((this.y + this.h - 10 + 10) > pry) && ((this.x + this.w - 10 + 10) > prx)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void resize(int x, int y){
+        if(x - this.x >= 20){
+            this.w = x - this.x;
+        }
+        else{
+
+        }
+        if(y - this.y >= 20){
+            this.h = y - this.y;
+        }
+        else{
+
         }
     }
 }

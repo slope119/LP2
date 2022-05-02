@@ -50,12 +50,12 @@ class ListFrame extends JFrame {
                         }
                     }
                     if(focus != null){
-                        difx = focus.x - prx;
-                        dify = focus.y - pry;
+                        difx = focus.getX() - prx;
+                        dify = focus.getY() - pry;
                     }
                     a = false;
                     if(focus != null){
-                        if(((focus.x + focus.w - 10) <= prx) && ((focus.y + focus.h - 10) <= pry) && ((focus.y + focus.h - 10 + 10) > pry) && ((focus.x + focus.w - 10 + 10) > prx)){
+                        if(focus.clickeds(prx,pry) == true){
                             a = true;
                         }
                     }
@@ -69,18 +69,7 @@ class ListFrame extends JFrame {
             new MouseMotionAdapter() {
                 public void mouseDragged (MouseEvent evt){
                     if(a == true){
-                        if(evt.getX() - focus.x >= 20){
-                            focus.w = evt.getX() - focus.x;
-                        }
-                        else{
-
-                        }
-                        if(evt.getY() - focus.y >= 20){
-                            focus.h = evt.getY() - focus.y;
-                        }
-                        else{
-
-                        }
+                        focus.resize(evt.getX(), evt.getY());
                     }
                     else if(focus != null){
                         focus.drag(evt.getX(),evt.getY(), difx, dify);
@@ -136,28 +125,27 @@ class ListFrame extends JFrame {
                     }
                     else if (evt.getKeyChar() == 'f'){
                         if(focus != null){
-                            figs.get(figs.size()-1).corl = new Color(r1,g,b);
-                            figs.get(figs.size()-1).corf = new Color(r2,g2,b2);
+                            figs.get(figs.size()-1).recolor(r1, g, b, r2, g2, b2);
                         }
                     }
                     else if (evt.getKeyChar() == 'w'){
                         if (focus != null){
-                            figs.get(figs.size()-1).y -= 15;
+                            figs.get(figs.size()-1).movew();
                         }
                     }
                     else if (evt.getKeyChar() == 'a'){
                         if (focus != null){
-                            figs.get(figs.size()-1).x -= 15;
+                            figs.get(figs.size()-1).movea();
                         }
                     }
                     else if (evt.getKeyChar() == 's'){
                         if (focus != null){
-                            figs.get(figs.size()-1).y += 15;
+                            figs.get(figs.size()-1).moves();
                         }
                     }
                     else if (evt.getKeyChar() == 'd'){
                         if (focus != null){
-                            figs.get(figs.size()-1).x += 15;
+                            figs.get(figs.size()-1).moved();
                         }
                     }
                     else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
@@ -174,10 +162,8 @@ class ListFrame extends JFrame {
                     }
                     else if (evt.getKeyCode() == 109) {
                         if(focus!= null){
-                            if(figs.get(figs.size()-1).w > 20 && figs.get(figs.size()-1).h > 20){
-                                figs.get(figs.size()-1).resized();
-                                focus = figs.get(figs.size()-1);
-                            }
+                            figs.get(figs.size()-1).resized();
+                            focus = figs.get(figs.size()-1);     
                         }
                     }
                     else if (evt.getKeyCode() == KeyEvent.VK_TAB) {
