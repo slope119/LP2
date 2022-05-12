@@ -8,6 +8,8 @@ import java.util.Random;
 import figures.Rect;
 import figures.Ellipse;
 import figures.Figure;
+import ivisible.IVisible;
+import ivisible.Button;
 
 class ListApp{
     public static void main (String[] args) {
@@ -18,13 +20,16 @@ class ListApp{
 
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
+    ArrayList<Button> buts = new ArrayList<Button>();
     Random rand = new Random();
     Figure focus;
+    Button focusb;
     int prx,pry;
     int difx, dify;
     boolean a = false;
 
     ListFrame () {
+
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
@@ -33,21 +38,91 @@ class ListFrame extends JFrame {
             }
         );
 
-
-
         this.addMouseListener(
             new MouseAdapter() {
                 public void mousePressed (MouseEvent evt){
+
+
+                    int r1 = rand.nextInt(255);
+                    int g = rand.nextInt(255);
+                    int b = rand.nextInt(255);
+                    int r2 = rand.nextInt(255);
+                    int g2 = rand.nextInt(255);
+                    int b2 = rand.nextInt(255);
+                    int x = rand.nextInt(350);
+                    int y = rand.nextInt(350);
+                    int h = rand.nextInt((130 - 30) + 30);
+                    int w = rand.nextInt(130 - h) + h + 35;
+
+
                     focus =  null;
                     prx = evt.getX();
                     pry = evt.getY();
-                    for (int i=figs.size()-1; i >= 0; i--){
-                        if(figs.get(i).clicked(prx,pry) == true){
-                            focus=figs.get(i);
-                            figs.remove(figs.get(i));
-                            figs.add(focus);
-                            break;
+
+                    if(focusb != null){
+                        if(focusb.kind == 1){
+                            if(buts.get(0).clicked(prx,pry) == false && buts.get(1).clicked(prx,pry) == false && buts.get(2).clicked(prx,pry) == false && buts.get(3).clicked(prx,pry) == false){
+                                Rect q = new Rect(prx,pry, h + 20,h + 20, new Color(r1,g,b), new Color(r2,g2,b2));
+                                focus = q;
+                                figs.add(q);
+                            }    
                         }
+                        if(focusb.kind == 2){
+                            if(buts.get(0).clicked(prx,pry) == false && buts.get(1).clicked(prx,pry) == false && buts.get(2).clicked(prx,pry) == false && buts.get(3).clicked(prx,pry) == false){
+                                Rect r = new Rect(prx,pry, w + 10,h + 10, new Color(r1,g,b), new Color(r2,g2,b2));
+                                focus = r;
+                                figs.add(r);
+                            } 
+                        }
+                        if(focusb.kind == 3){
+                            if(buts.get(0).clicked(prx,pry) == false && buts.get(1).clicked(prx,pry) == false && buts.get(2).clicked(prx,pry) == false && buts.get(3).clicked(prx,pry) == false){
+                                Ellipse c = new Ellipse(prx,pry, h,h,new Color(r1,g,b), new Color(r2,g2,b2));
+                                focus = c;
+                                figs.add(c);
+                            } 
+                        }
+                        if(focusb.kind == 4){
+                            if(buts.get(0).clicked(prx,pry) == false && buts.get(1).clicked(prx,pry) == false && buts.get(2).clicked(prx,pry) == false && buts.get(3).clicked(prx,pry) == false){
+                                Ellipse e = new Ellipse(prx,pry, w + 10,h + 10,new Color(r1,g,b), new Color(r2,g2,b2));
+                                focus = e;
+                                figs.add(e);
+                            } 
+                        }
+                    }
+
+                    if(focusb == null){
+                        for (int i=figs.size()-1; i >= 0; i--){
+                            if(figs.get(i).clicked(prx,pry) == true){
+                                focus=figs.get(i);
+                                figs.remove(figs.get(i));
+                                figs.add(focus);
+                                break;
+                            }
+                        }
+                    }
+                    focusb = null;
+                    if(focus == null){
+                        for (int i = 0; i <= buts.size()- 1; i++){
+                            if(buts.get(i).clicked(prx,pry) == true){
+                                focusb = buts.get(i);
+                            }
+                        }
+                    }
+                    //o focusb funciona corretamente
+                    if(focusb == null){
+                        System.out.print("Sem foco\n");
+                    }
+                    else if(focusb.kind == 1){
+                        System.out.print("botao do tipo 1\n");
+                    }
+                    else if(focusb.kind == 2){
+                        System.out.print("botao do tipo 2\n");
+                    }
+                    else if(focusb.kind == 3){
+                        System.out.print("botao do tipo 3\n");
+                    }
+                    else if(focusb.kind == 4){
+                        System.out.print("botao do tipo 4\n");
                     }
                     if(focus != null){
                         difx = focus.getX() - prx;
@@ -95,6 +170,7 @@ class ListFrame extends JFrame {
                     int y = rand.nextInt(350);
                     int h = rand.nextInt((130 - 30) + 30);
                     int w = rand.nextInt(130 - h) + h + 35;
+
                     if (evt.getKeyChar() == 'r') {
                         mx = p.x - getLocation().x;
                         my = p.y - getLocation().y;
@@ -149,6 +225,8 @@ class ListFrame extends JFrame {
                         }
                     }
                     else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+                        //mudar a condiçao pra verificar se focus == ultimo elemento da lista de figuras
+                        //assim o delete so vai funcionar se o foco for uma figura, n uma interface
                         if(focus!= null){
                             figs.remove(figs.size()-1);
                             focus = null;
@@ -184,19 +262,45 @@ class ListFrame extends JFrame {
         super.paint(g);
         for (Figure fig: this.figs) {
             if(fig == focus){
-                fig.paint1(g);
+                fig.paint(g, true);
             }
             else{
-                fig.paint(g);
+                fig.paint(g, false);
             }
-            //fig.paint(g);
         }
+
+        Button bt;
+        bt = new Button(8,50,70,70,1);
+        buts.add(bt);
+        bt = new Button(8,121,70,70,2);
+        buts.add(bt);
+        bt = new Button(8,191,70,70,3);
+        buts.add(bt);
+        bt = new Button(8,261,70,70,4);
+        buts.add(bt);
+
+        for (int i = 0; i <= buts.size()- 1; i++){
+            if(focusb == buts.get(i)){
+                buts.get(i).paint(g, true);
+            }
+            else{
+                buts.get(i).paint(g, false);
+            }
+        }
+
     }
 }
 
 
+//corrigir a forma do print
+//corrigir a forma como o focus é detectado
+//corrigir pq todos os botoes entram em foco ao mesmo tempo
+//problema está no método paint
+//melhorar a forma como as figuras sao printadas na tela
 
-//foco vai continuar funcionando depois de fazer uma lista ainda mais heterogenea com botoes e figuras
+
+
+//criar novo foco para os botoes
 
 //foco vai determinar quando qualquer coisa é clicada, nao vai ter q ser mexido
 
@@ -204,13 +308,12 @@ class ListFrame extends JFrame {
 //   (dentro do mouse listener)
 //if(focus == botao r){
 //    criar retangulo na posiçao atual do mouse apos o clique
+//    add no final da lista de figures
+//    focus = nova figura
 //}
-
-//para solucionar o tab vou ter q fazer uma forma inteligente de percorrer a lista e identificar se é um botao ou n
-//provavelmente botar uma condiçao e fazer um += ao i para pular o elemento botao na lista
 
 //solucionar problema de alternar clique de foco (ou não)
 
-//fazer condiçao da area do clique para separar a interface, se clicar dentro so faz nada, se clicar fora cria a figura e torna o foco == null;
+//fazer condiçao da area do clique para separar a interface, usar a mesma condiçao do clicked mas pra checar se o clique foi fora da area dos botoes
 //fazer novas condições no metodo drag pra impedir que figuras fiquem sobre os botoes
 //criar linhas para determinar a area da interface

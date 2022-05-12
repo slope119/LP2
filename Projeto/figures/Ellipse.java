@@ -20,24 +20,24 @@ public class Ellipse extends Figure {
             this.w, this.h, this.x, this.y);
     }
 
-    public void paint (Graphics g) {
+    public void paint (Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setPaint(this.corf);
-        g2d.fill(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
-        g2d.setPaint(this.corl);
-        g2d.draw(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
-    }
-    public void paint1 (Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setPaint(this.corf);
-        g2d.fill(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
-        g2d.setPaint(this.corl);
-        g2d.draw(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
-        g2d.setPaint(this.corfocus);
-        g2d.drawRect(this.x - 5,this.y - 5,this.w + 10,this.h +10);
-        g2d.setPaint(new Color(0,0,0));
-        g2d.fillRect(this.x + this.w-10,this.y + this.h-10,10 ,10);
-
+        if(focused == false){
+            g2d.setPaint(this.corf);
+            g2d.fill(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
+            g2d.setPaint(this.corl);
+            g2d.draw(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
+        }
+        else if(focused == true){
+            g2d.setPaint(this.corf);
+            g2d.fill(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
+            g2d.setPaint(this.corl);
+            g2d.draw(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
+            g2d.setPaint(this.corfocus);
+            g2d.drawRect(this.x - 5,this.y - 5,this.w + 10,this.h +10);
+            g2d.setPaint(new Color(0,0,0));
+            g2d.fillRect(this.x + this.w-10,this.y + this.h-10,10 ,10);
+        }
     }
     public int getX(){
         return(this.x);
