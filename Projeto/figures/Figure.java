@@ -4,8 +4,9 @@ import ivisible.IVisible;
 
 import java.awt.Graphics;
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class Figure implements IVisible{
+public abstract class Figure implements IVisible, Serializable{
     int x, y, w, h;
     Color corfocus = new Color(255, 0, 0);
     int r1,g,b;

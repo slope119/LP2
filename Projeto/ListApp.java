@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.*;
 
 
 import figures.Rect;
@@ -26,17 +27,40 @@ class ListFrame extends JFrame {
     Button focusb;
     int prx,pry;
     int difx, dify;
-    boolean a = false;
+    boolean a = false;  
 
     ListFrame () {
+
+        buts.add(new Button(8,50,70,70,1));
+        buts.add(new Button(8,121,70,70,2));
+        buts.add(new Button(8,191,70,70,3));
+        buts.add(new Button(8,261,70,70,4));
 
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
+                    try{
+                        FileOutputStream f = new FileOutputStream("proj.bin");
+                        ObjectOutputStream o = new ObjectOutputStream(f);
+                        o.writeObject(figs);
+                        o.flush();
+                        o.close();
+                    }catch(Exception x){                    
+                    }
                     System.exit(0);
                 }
             }
         );
+
+        try{
+            FileInputStream f = new FileInputStream("proj.bin");
+            ObjectInputStream o = new ObjectInputStream(f);
+            this.figs = (ArrayList<Figure>) o.readObject();
+            o.close();
+        }catch (Exception x){
+            System.out.println("Erro");
+        }
+
 
         this.addMouseListener(
             new MouseAdapter() {
@@ -107,22 +131,6 @@ class ListFrame extends JFrame {
                                 focusb = buts.get(i);
                             }
                         }
-                    }
-                    //o focusb funciona corretamente
-                    if(focusb == null){
-                        System.out.print("Sem foco\n");
-                    }
-                    else if(focusb.kind == 1){
-                        System.out.print("botao do tipo 1\n");
-                    }
-                    else if(focusb.kind == 2){
-                        System.out.print("botao do tipo 2\n");
-                    }
-                    else if(focusb.kind == 3){
-                        System.out.print("botao do tipo 3\n");
-                    }
-                    else if(focusb.kind == 4){
-                        System.out.print("botao do tipo 4\n");
                     }
                     if(focus != null){
                         difx = focus.getX() - prx;
@@ -225,8 +233,6 @@ class ListFrame extends JFrame {
                         }
                     }
                     else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
-                        //mudar a condiçao pra verificar se focus == ultimo elemento da lista de figuras
-                        //assim o delete so vai funcionar se o foco for uma figura, n uma interface
                         if(focus!= null){
                             figs.remove(figs.size()-1);
                             focus = null;
@@ -260,6 +266,7 @@ class ListFrame extends JFrame {
 
     public void paint (Graphics g) {
         super.paint(g);
+
         for (Figure fig: this.figs) {
             if(fig == focus){
                 fig.paint(g, true);
@@ -269,24 +276,10 @@ class ListFrame extends JFrame {
             }
         }
 
-        Button bt;
-        bt = new Button(8,50,70,70,1);
-        buts.add(bt);
-        bt = new Button(8,121,70,70,2);
-        buts.add(bt);
-        bt = new Button(8,191,70,70,3);
-        buts.add(bt);
-        bt = new Button(8,261,70,70,4);
-        buts.add(bt);
-
         for (int i = 0; i <= buts.size()- 1; i++){
-            if(focusb == buts.get(i)){
-                buts.get(i).paint(g, true);
-            }
-            else{
-                buts.get(i).paint(g, false);
-            }
+            buts.get(i).paint(g, buts.get(i) == focusb);
         }
+
 
     }
 }
