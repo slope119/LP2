@@ -79,9 +79,18 @@ class ListFrame extends JFrame {
                     int w = rand.nextInt(130 - h) + h + 35;
 
 
-                    focus =  null;
+                    focus = null;
                     prx = evt.getX();
                     pry = evt.getY();
+                    boolean btc = true;
+
+                    if(focusb != null){
+                        if(focusb.clicked(prx,pry) == true){
+                            System.out.println("foco removido");
+                            focusb = null;
+                            btc = false;
+                            }
+                    }
 
                     if(focusb != null){
                         if(focusb.kind == 1){
@@ -124,14 +133,19 @@ class ListFrame extends JFrame {
                             }
                         }
                     }
+
                     focusb = null;
-                    if(focus == null){
+                    if(focus == null && btc){
                         for (int i = 0; i <= buts.size()- 1; i++){
                             if(buts.get(i).clicked(prx,pry) == true){
                                 focusb = buts.get(i);
                             }
                         }
                     }
+                    else if(btc == false){
+                        btc = true;
+                    }
+
                     if(focus != null){
                         difx = focus.getX() - prx;
                         dify = focus.getY() - pry;
@@ -254,6 +268,10 @@ class ListFrame extends JFrame {
                         focus=figs.get(0);
                         figs.remove(figs.get(0));
                         figs.add(focus);
+                    }
+                    else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                        focus=null;
+                        focusb=null;
                     }
                     repaint();
                 } 
