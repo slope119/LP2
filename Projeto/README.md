@@ -14,3 +14,4 @@
   - **clique**: seleciona a figura para ficar em foco
   - **arrastar**: move a figura
   - **tab**: troca a figura em foco
+  - **esc**: remove todos os focos
