@@ -16,5 +16,5 @@
   - **tab**: troca a figura em foco
   - **esc**: remove todos os focos
 - **Interface**:
-  -**botão circular verde**: randomiza todas as cores das figuras
-  -**botão x vermelho**: limpa todas as figuras da tela
+  - **botão circular verde**: randomiza todas as cores das figuras
+  - **botão x vermelho**: limpa todas as figuras da tela
