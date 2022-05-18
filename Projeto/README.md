@@ -18,3 +18,4 @@
 - **Interface**:
   - **botão circular verde**: randomiza todas as cores das figuras
   - **botão x vermelho**: limpa todas as figuras da tela
+  - **botões das figuras**: clique no botao referente a figura que voce quer criar, depois clique na tela para cria-la. clique de volta no botao para cancelar a criação
