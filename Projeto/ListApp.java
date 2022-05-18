@@ -35,6 +35,8 @@ class ListFrame extends JFrame {
         buts.add(new Button(8,121,70,70,2));
         buts.add(new Button(8,191,70,70,3));
         buts.add(new Button(8,261,70,70,4));
+        buts.add(new Button(8,332,35,35,5));
+        buts.add(new Button(43,332,35,35,6));
 
         this.addWindowListener (
             new WindowAdapter() {
@@ -123,6 +125,21 @@ class ListFrame extends JFrame {
                         }
                     }
 
+                    if(buts.get(4).clicked(prx,pry)){
+                        figs.clear();
+                    }
+                    if(buts.get(5).clicked(prx,pry)){
+                        for(int i=0; i<=figs.size()-1; i++){
+                            int r11 = rand.nextInt(255);
+                            int g11 = rand.nextInt(255);
+                            int b11 = rand.nextInt(255);
+                            int r22 = rand.nextInt(255);
+                            int g22 = rand.nextInt(255);
+                            int b22 = rand.nextInt(255);
+                            figs.get(i).recolor(r11, g11, b11, r22, g22, b22);
+                        }
+                    }
+
                     if(focusb == null){
                         for (int i=figs.size()-1; i >= 0; i--){
                             if(figs.get(i).clicked(prx,pry) == true){
@@ -137,7 +154,7 @@ class ListFrame extends JFrame {
                     focusb = null;
                     if(focus == null && btc){
                         for (int i = 0; i <= buts.size()- 1; i++){
-                            if(buts.get(i).clicked(prx,pry) == true){
+                            if(buts.get(i).clicked(prx,pry) == true && buts.get(i).kind != 5 && buts.get(i).kind != 6){
                                 focusb = buts.get(i);
                             }
                         }
@@ -296,6 +313,9 @@ class ListFrame extends JFrame {
 
         for (int i = 0; i <= buts.size()- 1; i++){
             buts.get(i).paint(g, buts.get(i) == focusb);
+            if(buts.get(i).kind == 5 || buts.get(i).kind == 6){
+                buts.get(i).paint(g,false);
+            }
         }
 
 

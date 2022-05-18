@@ -60,5 +60,19 @@ public class Button implements IVisible{
 		if(this.kind == 4){
 			g2d.fill(new Ellipse2D.Double(this.x + 8,this.y + 15, this.w - 15,this.h - 30));
 		}
+		if(this.kind == 5){
+			g2d.setPaint(new Color(255,0,0));
+			g2d.setStroke(new BasicStroke(3));
+			g2d.drawLine(this.x, this.y, this.x + w, this.y + h);
+			g2d.drawLine(this.x, this.y + h, this.x + w, this.y);
+		}
+		if(this.kind == 6){
+			g2d.setPaint(new Color(255,255,102));
+			g2d.fill(new Ellipse2D.Double(this.x + 10 ,this.y + 10, this.w - 20,this.h - 20));
+			g2d.setPaint(new Color(0,255,0));
+			g2d.setStroke(new BasicStroke(2));
+			g2d.draw(new Ellipse2D.Double(this.x + 10 ,this.y + 10, this.w - 20,this.h - 20));
+			g2d.setStroke(new BasicStroke(1));
+		}
 	}
 }
